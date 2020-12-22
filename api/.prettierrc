@@ -1,0 +1,7 @@
+{
+  "singleQuote": true,
+  "trailingComma": "none",
+  "prettier/prettier": ["warning", {}, {
+    "usePrettierrc": false
+  }]
+}
