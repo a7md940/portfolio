@@ -30,7 +30,7 @@ class ProjectList extends React.Component {
     renderList = () => {
         return this.state.projects.map((x) => {
             return (
-                <ProjectListItem project={x} />
+                <ProjectListItem key={x.id} project={x} />
             );
         });
     }
