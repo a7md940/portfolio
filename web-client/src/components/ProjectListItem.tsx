@@ -1,24 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import './ProjectListItem.scss'; 
 import { Project } from '../models/project.model';
 
 interface IProjectListItemProps {
     project: Project;
 }
 class ProjectListItem extends React.Component<IProjectListItemProps> {
-    constructor(props: IProjectListItemProps) {
-        super(props);
-    }
     render() {
         return (
-            <div className="">
-                <h4>Project title</h4>
+            <div className="project-wrapper">
+                <h4>{this.props.project.title}</h4>
                 <article>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Illo nesciunt incidunt suscipit a laborum atque sit doloremque corrupti, ipsa,
-                    blanditiis ab magni quisquam tempora placeat dignissimos. Atque magni aspernatur vero.
-
+                    <p dangerouslySetInnerHTML={{ __html: `${this.props.project.body}` }}></p>
                     <Link to={`/project/${this.props.project.id}`}>see more..</Link>
                 </article>
             </div>

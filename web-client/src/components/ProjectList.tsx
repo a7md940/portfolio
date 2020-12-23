@@ -1,34 +1,23 @@
 import React from 'react';
 import { Project } from '../models/project.model';
 import ProjectListItem from './ProjectListItem';
+import { connect } from 'react-redux';
+import { fetchProjects } from '../store/actions/fetch-projects.action';
+import { RootState } from '../store/action-types';
+import './ProjectList.scss'
 
-
-interface IProjectListState {
+interface IProjectListProps {
+    fetchProjects: () => any;
     projects: Project[];
 }
-class ProjectList extends React.Component {
-    state: IProjectListState;
-    constructor(props: {}) {
-        super(props);
+class ProjectList extends React.Component<IProjectListProps> {
 
-        this.state = {
-            projects: [
-                {
-                    id: 'dsgdfgdfg3554tdsdg3',
-                    title: 'Project 1',
-                    body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsam et delectus accusamus consequuntur! Earum quos, perferendis sunt architecto placeat distinctio ratione dolorem corporis vel ipsam neque quam. Eius, aliquid?'
-                },
-                {
-                    id: 'ql2kk4mfffmelt3hrg',
-                    title: 'Project 2',
-                    body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ipsam et delectus accusamus consequuntur! Earum quos, perferendis sunt architecto placeat distinctio ratione dolorem corporis vel ipsam neque quam. Eius, aliquid?'
-                },
-            ]
-        };
+    componentDidMount() {
+        this.props.fetchProjects();
     }
 
     renderList = () => {
-        return this.state.projects.map((x) => {
+        return this.props.projects.map((x) => {
             return (
                 <ProjectListItem key={x.id} project={x} />
             );
@@ -37,12 +26,13 @@ class ProjectList extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Project List</h1>
+            <div className="ProjectList">
                 { this.renderList() }
             </div>
         );
     }
 }
-
-export default ProjectList;
+const mapStateToProps = (state: RootState) => {
+    return { projects: Object.values(state.projects.list) };
+}
+export default connect(mapStateToProps, { fetchProjects })(ProjectList);

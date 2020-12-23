@@ -6,9 +6,8 @@ class HomeComponent extends React.Component {
         return (
             <React.Fragment>
                 <span>Home page</span>
-
-                <ProjectList>
-                </ProjectList>
+                <ProjectList />
+               
             </React.Fragment>
         );
     }

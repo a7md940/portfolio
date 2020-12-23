@@ -7,7 +7,7 @@ import { ProjectService } from '../../../services/project/project.service';
 export class ProjectController {
   constructor(private _projectService: ProjectService) {}
   @Post()
-  createFirstProject(@Body(CreateProjectDtoPipe) projectDto: CreateProjectDto) {
+  createProject(@Body(CreateProjectDtoPipe) projectDto: CreateProjectDto) {
     return this._projectService.createProject(projectDto.toModel())
       .then(ProjectDto.toDto);
   }
